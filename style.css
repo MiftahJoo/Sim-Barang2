@@ -1,0 +1,172 @@
+/* RESET DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* PENGATURAN BODY */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* HEADER */
+header {
+    background-color: #142d4e;
+    color: white;
+    padding: 25px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #1e416b;
+    padding: 12px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+nav a:hover {
+    background-color: #31577f;
+    border-radius: 5px;
+}
+
+/* MAIN CONTENT - CSS GRID */
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* BERANDA MEMENUHI LEBAR */
+#beranda {
+    grid-column: 1 / -1;
+}
+
+section {
+    background-color: white;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+section h2 {
+    color: #142d4e;
+    margin-bottom: 15px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    #beranda {
+        grid-column: auto;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    header {
+        padding: 20px 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    main {
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+}
+
+/* PERBAIKAN TAMPILAN HP */
+@media (max-width: 600px) {
+
+    html, body {
+        width: 100%;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    header,
+    nav {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    header {
+        padding: 25px 15px;
+    }
+
+    nav {
+        padding: 15px;
+    }
+
+    nav ul {
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    main {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    section {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    footer {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 20px 15px;
+    }
+}
