@@ -6,6 +6,31 @@ if (!isset($_SESSION["login"])) {
     header("Location: login.php");
     exit;
 }
+
+// Menghubungkan ke database
+require_once "koneksi.php";
+
+// Mengambil data barang dan nama kategori
+$query = "SELECT
+            barang.id_barang,
+            barang.kode_barang,
+            barang.nama_barang,
+            kategori.nama_kategori,
+            barang.jumlah,
+            barang.kondisi,
+            barang.harga_satuan
+          FROM barang
+          INNER JOIN kategori
+          ON barang.id_kategori = kategori.id_kategori
+          ORDER BY barang.id_barang ASC";
+
+$stmt = $pdo->query($query);
+$dataBarang = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Mengambil daftar kategori
+$queryKategori = "SELECT * FROM kategori ORDER BY nama_kategori ASC";
+$stmtKategori = $pdo->query($queryKategori);
+$dataKategori = $stmtKategori->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -58,45 +83,62 @@ if (!isset($_SESSION["login"])) {
                 placeholder="Cari barang..."
             >
 
-           <div class="table-responsive"> 
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Kode Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Kategori</th>
-                        <th>Jumlah</th>
-                        <th>Kondisi</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>Kondisi</th>
+                            <th>Harga Satuan</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <tr>
-                        <td>BRG-001</td>
-                        <td>Laptop</td>
-                        <td>Elektronik</td>
-                        <td>10</td>
-                        <td>Baik</td>
-                    </tr>
+                    <tbody>
+                        <?php if (count($dataBarang) > 0): ?>
 
-                    <tr>
-                        <td>BRG-002</td>
-                        <td>Printer</td>
-                        <td>Elektronik</td>
-                        <td>5</td>
-                        <td>Baik</td>
-                    </tr>
+                            <?php foreach ($dataBarang as $barang): ?>
+                                <tr>
+                                    <td>
+                                        <?= htmlspecialchars($barang['kode_barang']) ?>
+                                    </td>
 
-                    <tr>
-                        <td>BRG-003</td>
-                        <td>Meja</td>
-                        <td>Furniture</td>
-                        <td>15</td>
-                        <td>Baik</td>
-                    </tr>
-                </tbody>
-            </table>
-           </div>
+                                    <td>
+                                        <?= htmlspecialchars($barang['nama_barang']) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars($barang['nama_kategori']) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars($barang['jumlah']) ?>
+                                    </td>
+
+                                    <td>
+                                        <?= htmlspecialchars($barang['kondisi']) ?>
+                                    </td>
+
+                                    <td>
+                                        Rp <?= number_format($barang['harga_satuan'], 0, ',', '.') ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+
+                        <?php else: ?>
+
+                            <tr>
+                                <td colspan="6">
+                                    Belum ada data barang.
+                                </td>
+                            </tr>
+
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- SECTION INPUT BARANG -->
@@ -130,9 +172,13 @@ if (!isset($_SESSION["login"])) {
                 <label for="kategori">Kategori:</label>
                 <select id="kategori" name="kategori" required>
                     <option value="">Pilih Kategori</option>
-                    <option value="Elektronik">Elektronik</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Peralatan">Peralatan</option>
+
+                    <?php foreach ($dataKategori as $kategori): ?>
+                        <option value="<?= $kategori['id_kategori'] ?>">
+                            <?= htmlspecialchars($kategori['nama_kategori']) ?>
+                        </option>
+                    <?php endforeach; ?>
+
                 </select>
 
                 <br><br>
@@ -143,6 +189,7 @@ if (!isset($_SESSION["login"])) {
                     id="jumlah"
                     name="jumlah"
                     placeholder="Masukkan jumlah barang"
+                    min="1"
                     required
                 >
 
@@ -166,7 +213,7 @@ if (!isset($_SESSION["login"])) {
                     placeholder="Masukkan harga barang"
                     min="0"
                     required
-                > 
+                >
 
                 <button type="submit">Simpan Barang</button>
 
@@ -181,5 +228,6 @@ if (!isset($_SESSION["login"])) {
     </footer>
 
     <script src="main.js"></script>
+
 </body>
 </html>
