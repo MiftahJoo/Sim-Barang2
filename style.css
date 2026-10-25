@@ -170,3 +170,37 @@ section h2 {
         padding: 20px 15px;
     }
 }
+
+/* Notifikasi Toast */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 22px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    z-index: 9999;
+    display: none;
+}
+
+.toast.success,
+.toast.error {
+    display: block;
+}
+
+.toast.success {
+    background-color: #198754;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+#pencarian {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIM-Barang</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -39,7 +41,14 @@
         <section id="barang">
             <h2>Data Inventaris Barang</h2>
 
-            <table>
+            <input
+                type="text"
+                id="pencarian"
+                placeholder="Cari barang..."
+            >
+
+           <div class="table-responsive"> 
+            <table border="1">
                 <thead>
                     <tr>
                         <th>Kode Barang</th>
@@ -76,6 +85,7 @@
                     </tr>
                 </tbody>
             </table>
+           </div>
         </section>
 
         <!-- SECTION INPUT BARANG -->
@@ -149,5 +159,6 @@
         <p>&copy; 2026 SIM-Barang. Sistem Informasi Manajemen Barang.</p>
     </footer>
 
+    <script src="main.js"></script>
 </body>
 </html>
