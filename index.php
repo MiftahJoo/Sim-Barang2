@@ -92,7 +92,7 @@
         <section id="input">
             <h2>Form Input Barang</h2>
 
-            <form action="#" method="post">
+            <form action="simpan.php" method="POST">
 
                 <label for="kode">Kode Barang:</label>
                 <input
@@ -146,6 +146,16 @@
                 </select>
 
                 <br><br>
+
+                <label for="harga">Harga Barang:</label>
+                <input
+                    type="number"
+                    id="harga"
+                    name="harga_satuan"
+                    placeholder="Masukkan harga barang"
+                    min="0"
+                    required
+                > 
 
                 <button type="submit">Simpan Barang</button>
 
