@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Memeriksa apakah pengguna sudah login
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
