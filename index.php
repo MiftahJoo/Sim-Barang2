@@ -31,6 +31,7 @@ if (!isset($_SESSION["login"])) {
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#barang">Data Barang</a></li>
             <li><a href="#input">Input Barang</a></li>
+            <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
 
